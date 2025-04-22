@@ -1,7 +1,7 @@
 import java.sql.*; // Importing the package
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
 
         /*
         Steps fot JDBC Connectivity
@@ -13,6 +13,8 @@ public class Main {
         - Process the result
         - Close the connection
          */
+
+
 
         // Load and register the driver
         try{
@@ -34,6 +36,7 @@ public class Main {
             System.out.println("Error creating connection");
         }
 
+        /*
         // Create a statement
         String getNameWithSid1 = "SELECT sname FROM STUDENT WHERE sid = 1"; // Query to be executed
         String getAllData = "SELECT * FROM STUDENT";
@@ -87,13 +90,32 @@ public class Main {
             System.out.println("Error updating data");
         }
 
+         /*
+        Issues with Statement:
+        - Concatenations is very difficult when working with variables instead of direct values
+        - Prone to SQL injections
+        - Does not cache the query
+        All these are solved using PreparedStatement
+         */
+
+        int sid = 9;
+        String sname = "PS";
+        String sql = "insert into student (sid, sname) values (?,?)";
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        preparedStatement.setInt(1, sid);
+        preparedStatement.setString(2, sname);
+        preparedStatement.execute();
+
         // Close the connection
         try{
-            statement.close();
             con.close();
             System.out.println("Connection closed");
         }catch (SQLException e){
             System.out.println("Error closing the connection");
         }
+
+
+
+
     }
 }

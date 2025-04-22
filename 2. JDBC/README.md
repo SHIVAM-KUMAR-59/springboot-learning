@@ -8,3 +8,9 @@
 - **Execute a statement or query**
 - **Process the result**
 - **Close the connection**
+
+### Issues with Statement:
+- **Concatenations are very difficult when working with variables instead of direct values**
+- **Prone to SQL injections**
+- **Does not cache the query**
+**All these are solved using PreparedStatement**
