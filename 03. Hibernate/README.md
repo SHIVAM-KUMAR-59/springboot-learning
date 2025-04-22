@@ -24,9 +24,9 @@
     <session-factory>
 
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/jdbcdemo</property>
-        <property name="hibername.connection.username">shivamkumar</property>
-        <property name="hibername.connection.password">Realmex7@123</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/databse_name</property>
+        <property name="hibername.connection.username">username</property>
+        <property name="hibername.connection.password">password</property>
 
     </session-factory>
 </hibernate-configuration>
