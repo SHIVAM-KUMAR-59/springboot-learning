@@ -17,3 +17,17 @@
 - **`SessionFactory`: A factory for Session objects.**
 - **`Transaction`: Wraps around database operations for atomicity.**
 - **`Configuration`: XML or annotation-based setup for Hibernate.**
+
+### Add these in your `resources/hibernate.cfg.xml`
+```xml
+<hibernate-configuration xmlns="http://www.hibernate.org/xsd/orm/cfg">
+    <session-factory>
+
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/jdbcdemo</property>
+        <property name="hibername.connection.username">shivamkumar</property>
+        <property name="hibername.connection.password">Realmex7@123</property>
+
+    </session-factory>
+</hibernate-configuration>
+```

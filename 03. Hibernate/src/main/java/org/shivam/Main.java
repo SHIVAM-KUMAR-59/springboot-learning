@@ -2,6 +2,7 @@ package org.shivam;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 public class Main {
@@ -13,9 +14,18 @@ public class Main {
 
         try{
             Configuration cfg = new Configuration();
+            cfg.addAnnotatedClass(org.shivam.Student.class);
+            cfg.configure();
+
             SessionFactory factory = cfg.buildSessionFactory();
             Session session = factory.openSession();
+
+            Transaction transaction = session.beginTransaction();
+
             session.save(s1);
+
+            transaction.commit();
+
         }catch(Exception e){
             e.printStackTrace();
         }

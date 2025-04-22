@@ -1,7 +1,13 @@
 package org.shivam;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Student {
-    private int rollNo;
+
+    @Id
+    private int rollNo; // Telling that this rollNo is the primary key
     private String sName;
     private int sAge;
 
