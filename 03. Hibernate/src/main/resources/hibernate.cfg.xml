@@ -8,7 +8,7 @@
         <property name="hibername.connection.password">Realmex7@123</property>
 
         <!-- hbm2ddl is used to convert hibernate to DDL -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
 
         <!-- Used to show sql queries in a better format -->
         <property name="hibernate.show_sql">true</property>

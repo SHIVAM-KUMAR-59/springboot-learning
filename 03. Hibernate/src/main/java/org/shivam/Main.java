@@ -7,67 +7,82 @@ import org.hibernate.cfg.Configuration;
 
 public class Main {
     public static void main(String[] args) {
-        // Creating a Student object to use for saving or updating
+        /*
         Student s1 = new Student();
         s1.setsName("Kumar");
         s1.setRollNo(102);
         s1.setsAge(19);
 
-        Student s2;
+        Student s2 = null;
 
-        // Changing age after setting earlier, demonstrating object change
         s1.setsAge(24);
 
-        try {
-            // Setting up the Hibernate configuration
-            // - Reads hibernate.cfg.xml
-            // - Registers the annotated entity class (Student)
-            SessionFactory factory = new Configuration()
-                    .addAnnotatedClass(org.shivam.Student.class)
-                    .configure()
-                    .buildSessionFactory();
+        try{
 
-            // Open a session to interact with the database
+            ------------------------------------------
+            Configuration cfg = new Configuration();
+            cfg.addAnnotatedClass(org.shivam.Student.class);
+            cfg.configure();
+
+            // Session factory is a very heavy package
+            // SessionFactory factory = cfg.buildSessionFactory();
+
+             ------------------------------------------
+
+            SessionFactory factory = new Configuration().addAnnotatedClass(org.shivam.Student.class).configure().buildSessionFactory();
             Session session = factory.openSession();
 
-            // =======================
-            // RETRIEVE DATA OPERATION
-            // =======================
-
-            // Get the Student entity by primary key (roll number)
-            // If the record with roll number 101 exists, it will be fetched
-            s2 = session.get(Student.class, 101);
-
-            if (s2 == null) {
-                System.out.println("Null"); // No record found
-            } else {
-                System.out.println(s2); // Print the retrieved student
-            }
-
-            // ========================
-            // DELETE / UPDATE OPERATION
-            // ========================
-
-            // Begin a transaction to perform database modification
+            ------------------------------------------
+            Required only when we are doing some operation like updation or creation
             Transaction transaction = session.beginTransaction();
 
-            // Option 1: Merge = Insert or Update based on record existence
-            // session.merge(s1); // Merges s1 into the database
+            session.persist(s1); // Saves the data
 
-            // Option 2: Remove = Delete the entity from database
-            session.remove(session.get(Student.class, 101)); // Delete student with roll number 101
+            transaction.commit(); // Commit so that the db gets updated
 
-            // Finalize the transaction (commit the change to DB)
+            ------------------------------------------
+
+            s2 = session.get(Student.class, 101); // Type and value of primary key
+
+            if(s2 == null){
+                System.out.println("Null");
+            }else{
+                System.out.println(s2);
+            }
+
+            // Use transaction to perform update oprations
+            Transaction transaction = session.beginTransaction();
+
+            // session.merge(s1); // Merge change the data in the database (if data is not there, it creates it)
+            // System.out.println(s1);
+
+            session.remove(session.get(Student.class, 101)); // Delete an object
             transaction.commit();
 
-            // ====================
-            // RESOURCE CLEAN-UP
-            // ====================
-            session.clear();  // Clear session cache
-            factory.close();  // Close the session factory
+            session.clear();
+            factory.close();
 
-        } catch (Exception e) {
+        }catch(Exception e){
             System.out.println("Error inserting data!");
         }
+
+         */
+
+        SessionFactory factory = new Configuration().addAnnotatedClass(org.shivam.Alien.class).configure().buildSessionFactory();
+        Session session = factory.openSession();
+
+        Alien a1 = new Alien();
+        a1.setAid(101);
+        a1.setAname("First");
+        a1.setTech("Java");
+
+        Transaction transaction = session.beginTransaction();
+
+        session.persist(a1);
+
+        transaction.commit();
+
+        session.clear();
+        factory.close();
     }
 }
