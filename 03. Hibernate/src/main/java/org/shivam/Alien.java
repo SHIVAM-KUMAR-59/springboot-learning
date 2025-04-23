@@ -4,15 +4,24 @@ import jakarta.persistence.*;
 
 //@Entity(name = "alien_table") // Keep a custom entity name
 @Entity
-@Table(name = "alien_table") // Does not change the entity name just changing the table name
+// @Table(name = "alien_table") // Does not change the entity name just changing the table name
 public class Alien {
 
     @Id
     private int aid;
-    @Column(name = "alien_name") // Custom column name
+   //  @Column(name = "alien_name") // Custom column name
     private String aname;
-    @Transient // This make sures that the attached data will not be stored in db, tech in this case
+    // @Transient // This make sures that the attached data will not be stored in db, tech in this case
     private String tech;
+    private Laptop laptop;
+
+    public Laptop getLaptop() {
+        return laptop;
+    }
+
+    public void setLaptop(Laptop laptop) {
+        this.laptop = laptop;
+    }
 
     public int getAid() {
         return aid;
@@ -44,6 +53,7 @@ public class Alien {
                 "aid=" + aid +
                 ", aname='" + aname + '\'' +
                 ", tech='" + tech + '\'' +
+                ", laptop=" + laptop +
                 '}';
     }
 }
