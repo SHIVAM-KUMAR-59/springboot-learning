@@ -92,5 +92,5 @@
   @OneToMany(fetch = FetchType.EAGER)
   private List<Laptop> laptops;
   ```
-- `session.get(object_type, primary_key) foes eager fetchin, i.e fires the query even when the data is not required further`
+- `session.get(object_type, primary_key)` foes eager fetching, i.e fires the query even when the data is not required further
 
