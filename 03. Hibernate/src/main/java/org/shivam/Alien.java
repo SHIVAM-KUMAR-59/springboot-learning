@@ -13,6 +13,7 @@ public class Alien {
     private String aname;
     // @Transient // This make sures that the attached data will not be stored in db, tech in this case
     private String tech;
+    @OneToOne // Have to mention the relationship
     private Laptop laptop;
 
     public Laptop getLaptop() {

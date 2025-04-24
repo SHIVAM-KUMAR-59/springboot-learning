@@ -1,13 +1,33 @@
 package org.shivam;
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
-@Embeddable // Allows us embbed the fields of  laptop into alien class without making a separate table for laptop
+@Entity
+// @Embeddable // Allows us embbed the fields of  laptop into alien class without making a separate table for laptop
 public class Laptop {
-
+    @Id
+    private int lid;
     private String brand;
     private String model;
     private int ram;
+
+    public int getRam() {
+        return ram;
+    }
+
+    public void setRam(int ram) {
+        this.ram = ram;
+    }
+
+    public int getLid() {
+        return lid;
+    }
+
+    public void setLid(int lid) {
+        this.lid = lid;
+    }
 
     public String getBrand() {
         return brand;
@@ -25,18 +45,11 @@ public class Laptop {
         this.model = model;
     }
 
-    public int getRam() {
-        return ram;
-    }
-
-    public void setRam(int ram) {
-        this.ram = ram;
-    }
-
     @Override
     public String toString() {
         return "Laptop{" +
-                "brand='" + brand + '\'' +
+                "lid=" + lid +
+                ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", ram=" + ram +
                 '}';

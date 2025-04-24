@@ -68,10 +68,11 @@ public class Main {
 
          */
 
-        SessionFactory factory = new Configuration().addAnnotatedClass(org.shivam.Alien.class).configure().buildSessionFactory();
+        SessionFactory factory = new Configuration().addAnnotatedClass(org.shivam.Alien.class).addAnnotatedClass(org.shivam.Laptop.class).configure().buildSessionFactory();
         Session session = factory.openSession();
 
         Laptop l1 = new Laptop();
+        l1.setLid(1);
         l1.setBrand("Asus");
         l1.setModel("Rog");
         l1.setRam(16);
@@ -84,12 +85,12 @@ public class Main {
 
         Transaction transaction = session.beginTransaction();
 
+        session.persist(l1);
         session.persist(a1);
 
         transaction.commit();
 
-        Alien a2 = null;
-        a2 = session.get(Alien.class, 101);
+        Alien a2 = session.get(Alien.class, 101);
         System.out.println(a2);
 
         session.clear();
