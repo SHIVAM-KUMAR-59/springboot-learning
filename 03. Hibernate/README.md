@@ -83,6 +83,7 @@
 ### Lazy Fetch
 - Hibernate loads only the main entity and postpones loading the associated entities until they are accessed. 
 - This saves memory and speeds up initial loading
+- `session.load(object_type, primary_key)` does lazy fetch but is deprecated thus we use `session.byId(object_type).getReference(primary_key)`
 
 ### Eager Fetch
 - Loads the main entity along with its associated entities in a single query (via joins). 
@@ -91,3 +92,5 @@
   @OneToMany(fetch = FetchType.EAGER)
   private List<Laptop> laptops;
   ```
+- `session.get(object_type, primary_key) foes eager fetchin, i.e fires the query even when the data is not required further`
+

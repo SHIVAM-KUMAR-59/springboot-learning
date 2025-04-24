@@ -119,14 +119,27 @@ public class Main {
         session.persist(a2);
          */
 
+        /*
+        -----------------------------------------------------------
         // SQL --> select * from Laptop where ram = 32;
         // HQL --> from Laptop where ram = 32;
 
-        Query query = session.createQuery("from Laptop where ram=32");
-        List<Laptop> laptops = query.getResultList();
+        String brand = "Asus";
+        Query query = session.createQuery("select brand, model from Laptop where brand Like ?1");
+        query.setParameter(1, brand);
+        List<Object []> laptops = query.getResultList();
 
         // Laptop l5 = session.get(Laptop.class, 4);
-        System.out.println(laptops);
+        // System.out.println(laptops);
+
+        for(Object [] data : laptops){
+            System.out.println((String)data[0] + " " + (String)data[1]);
+        }
+        --------------------------------------------------------------------
+         */
+
+        // Laptop l5 = session.load(Laptop.class, 3); // Load does not fire the SQL query unless l5 is being used anywhere (Lazy loading)
+        Laptop l5 = session.byId(Laptop.class).getReference(3); // Same this as load and this is not deprecated
 
 
         // transaction.commit();
