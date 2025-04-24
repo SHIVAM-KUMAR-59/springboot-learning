@@ -1,8 +1,8 @@
 package org.shivam;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 // @Embeddable // Allows us embbed the fields of  laptop into alien class without making a separate table for laptop
@@ -12,6 +12,17 @@ public class Laptop {
     private String brand;
     private String model;
     private int ram;
+    // @ManyToOne
+    @ManyToMany(mappedBy = "laptops")
+    private List<Alien> aliens;
+
+    public List<Alien> getAliens() {
+        return aliens;
+    }
+
+    public void setAliens(List<Alien> aliens) {
+        this.aliens = aliens;
+    }
 
     public int getRam() {
         return ram;

@@ -2,6 +2,8 @@ package org.shivam;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 //@Entity(name = "alien_table") // Keep a custom entity name
 @Entity
 // @Table(name = "alien_table") // Does not change the entity name just changing the table name
@@ -11,17 +13,24 @@ public class Alien {
     private int aid;
    //  @Column(name = "alien_name") // Custom column name
     private String aname;
+
     // @Transient // This make sures that the attached data will not be stored in db, tech in this case
     private String tech;
-    @OneToOne // Have to mention the relationship
-    private Laptop laptop;
 
-    public Laptop getLaptop() {
-        return laptop;
-    }
+    // @OneToOne // Have to mention the relationship
+    // private Laptop laptop;
 
-    public void setLaptop(Laptop laptop) {
-        this.laptop = laptop;
+    @ManyToMany
+    private List<Laptop> laptops;
+
+    @Override
+    public String toString() {
+        return "Alien{" +
+                "aid=" + aid +
+                ", aname='" + aname + '\'' +
+                ", tech='" + tech + '\'' +
+                ", laptops=" + laptops +
+                '}';
     }
 
     public int getAid() {
@@ -48,13 +57,11 @@ public class Alien {
         this.tech = tech;
     }
 
-    @Override
-    public String toString() {
-        return "Alien{" +
-                "aid=" + aid +
-                ", aname='" + aname + '\'' +
-                ", tech='" + tech + '\'' +
-                ", laptop=" + laptop +
-                '}';
+    public List<Laptop> getLaptops() {
+        return laptops;
+    }
+
+    public void setLaptops(List<Laptop> laptops) {
+        this.laptops = laptops;
     }
 }

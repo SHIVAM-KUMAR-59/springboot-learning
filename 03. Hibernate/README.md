@@ -31,3 +31,44 @@
     </session-factory>
 </hibernate-configuration>
 ```
+
+### 1. Configuration and Setup
+- Hibernate is configured using `Configuration` class.
+- Annotated classes are registered using `.addAnnotatedClass()`.
+- `SessionFactory` is built from configuration and is a heavyweight object.
+- `Session` is used to perform operations like save, update, get, delete.
+
+### 2. Entity Classes
+- `@Entity` marks the class as a database entity.
+- `@Id` denotes the primary key field.
+- `@ManyToMany`, `@OneToOne`, `@ManyToOne` etc., are used to define relationships.
+
+### 3. Relationships
+- `Alien` has a `@ManyToMany` relationship with `Laptop`.
+- Relationship is bidirectional: `Laptop` also has `@ManyToMany(mappedBy = "laptops")` pointing back to `Alien`.
+
+### 4. Persisting Data
+- Before performing database operations, begin a transaction with `session.beginTransaction()`.
+- Use `session.persist(object)` to insert entities into the database.
+- Commit the transaction using `transaction.commit()` to save changes.
+
+### 5. Fetching and Deleting
+- `session.get(Class, id)` fetches an object by its primary key.
+- `session.remove(object)` deletes an entity from the database.
+
+### 6. Notes on Object Lifecycle
+- `persist()` is used for new entities.
+- `merge()` can be used to update existing entities or insert if not present.
+- `clear()` and `close()` are called at the end to clean up session and factory resources.
+
+### 7. Miscellaneous
+- `@Transient` can be used to exclude a field from persistence.
+- `@Table` and `@Column` can customize table and column names.
+- `@Embeddable` can be used for value-type objects that are part of another entity.
+
+### Example Flow:
+1. Create objects (Alien, Laptop).
+2. Set relationships (both sides).
+3. Open session, begin transaction.
+4. Call `persist()` for all entities.
+5. Commit transaction, close session and factory.
