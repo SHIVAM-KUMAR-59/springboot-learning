@@ -20,7 +20,7 @@ public class Alien {
     // @OneToOne // Have to mention the relationship
     // private Laptop laptop;
 
-    @ManyToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Laptop> laptops;
 
     @Override

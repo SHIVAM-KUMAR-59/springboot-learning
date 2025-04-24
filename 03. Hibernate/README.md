@@ -72,3 +72,22 @@
 3. Open session, begin transaction.
 4. Call `persist()` for all entities.
 5. Commit transaction, close session and factory.
+
+### Caching in Hibernate
+- One of the major advantages of using `Hibernate` over vanilla JDBC is that it allows us to cache to frequent queries.
+- If for example both `persist()` and `get()` method is called in the same session then hibernate does not fire a query to the database, it simply takes the data from the session.
+- Cache is of 2 levels, `level 1` cache is used by hibernate by default.
+- If the same data is fetched once in the same session from the database, it does not fetch the data from database, it helps improve efficiency.
+- `Level 2` cache helps to communicate this data across sessions.
+
+### Lazy Fetch
+- Hibernate loads only the main entity and postpones loading the associated entities until they are accessed. 
+- This saves memory and speeds up initial loading
+
+### Eager Fetch
+- Loads the main entity along with its associated entities in a single query (via joins). 
+- May cause performance issues if not handled carefully (loads everything even when not needed).
+- ```xml
+  @OneToMany(fetch = FetchType.EAGER)
+  private List<Laptop> laptops;
+  ```
