@@ -4,8 +4,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -74,11 +76,12 @@ public class Main {
         Session session = factory.openSession();
 
         Laptop l1 = new Laptop();
-        l1.setLid(1);
+        l1.setLid(4);
         l1.setBrand("Asus");
-        l1.setModel("Rog");
-        l1.setRam(16);
+        l1.setModel("Strix");
+        l1.setRam(32);
 
+        /*
         Laptop l2 = new Laptop();
         l2.setLid(2);
         l2.setBrand("Dell");
@@ -104,19 +107,32 @@ public class Main {
 
         a1.setLaptops(Arrays.asList(l1, l2));
         a2.setLaptops(Arrays.asList(l3));
+        */
 
-        Transaction transaction = session.beginTransaction();
+        // Transaction transaction = session.beginTransaction();
 
-        session.persist(l1);
+        // session.persist(l1);
+        /*
         session.persist(l2);
         session.persist(l3);
         session.persist(a1);
         session.persist(a2);
+         */
 
-        transaction.commit();
+        // SQL --> select * from Laptop where ram = 32;
+        // HQL --> from Laptop where ram = 32;
 
-        Alien a5 = session.get(Alien.class, 101);
-        System.out.println(a5);
+        Query query = session.createQuery("from Laptop where ram=32");
+        List<Laptop> laptops = query.getResultList();
+
+        // Laptop l5 = session.get(Laptop.class, 4);
+        System.out.println(laptops);
+
+
+        // transaction.commit();
+
+        // Alien a5 = session.get(Alien.class, 101);
+        // System.out.println(a5);
 
         session.clear();
         factory.close();
