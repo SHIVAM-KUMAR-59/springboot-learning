@@ -6,16 +6,25 @@
 
     <!-- bean definitions here -->
 
-    <bean id="alien" class="org.shivam.Alien">
+    <bean id="alien" class="org.shivam.Alien" autowire="byName">
         <!-- assign the value 21 to age by calling the setter (setter injection) -->
-        <property name="age" value="21"></property>
+         <property name="age" value="21"/>
+
+        <!-- The sequence in which the constructors are defined should be same -->
+        <!-- assign the value 21 to age by calling the constructor (constructor injection) -->
+        <!-- <constructor-arg value="21"/> -->
 
         <!-- assign the reference (setter injection) -->
-        <property name="laptop" ref="laptop"></property>
+        <!-- <constructor-arg ref="laptop"/> -->
+
+        <!-- assign the reference (setter injection) -->
+<!--        Using autowire allows spring to connect automatically-->
+        <!-- <property name="comp" ref="comp"/> -->
 
     </bean>
 
-        <bean id="laptop" class="org.shivam.Laptop"></bean>
+        <bean id="comp" class="org.shivam.Laptop"></bean>
+        <bean id="comp1" class="org.shivam.Desktop"></bean>
 
 </beans>
 

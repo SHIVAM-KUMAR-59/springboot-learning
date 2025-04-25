@@ -1,9 +1,10 @@
 package org.shivam;
 
-public class Laptop {
+public class Laptop implements Computer {
 
+    @Override
     public void compile(){
-        System.out.println("Compiling...");
+        System.out.println("Compiling on laptop...");
     }
 
 }
