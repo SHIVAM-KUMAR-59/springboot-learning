@@ -6,7 +6,16 @@
 
     <!-- bean definitions here -->
 
-    <bean id="alien" class="org.shivam.Alien"></bean>
+    <bean id="alien" class="org.shivam.Alien">
+        <!-- assign the value 21 to age by calling the setter (setter injection) -->
+        <property name="age" value="21"></property>
+
+        <!-- assign the reference (setter injection) -->
+        <property name="laptop" ref="laptop"></property>
+
+    </bean>
+
+        <bean id="laptop" class="org.shivam.Laptop"></bean>
 
 </beans>
 
