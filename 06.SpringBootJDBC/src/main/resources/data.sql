@@ -1,0 +1,3 @@
+--insert into student (roll, name, marks) values (101, 'First', 79);
+--insert into student (roll, name, marks) values (102, 'Second', 99);
+--insert into student (roll, name, marks) values (103, 'Third', 99);
