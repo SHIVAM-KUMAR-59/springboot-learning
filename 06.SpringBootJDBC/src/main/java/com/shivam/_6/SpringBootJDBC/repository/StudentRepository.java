@@ -34,7 +34,7 @@ public class StudentRepository {
     public List<Student> findAll(){
         System.out.println("Getting..");
 
-        String sql = "SELECT * FROM STUDENT";
+        String sql = "SELECT * FROM STUDENT ORDER BY roll ASC";
 
         // Using lamba expressions
         RowMapper<Student> mapper = ( rs,  rowNum) -> {
