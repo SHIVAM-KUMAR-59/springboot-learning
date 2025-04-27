@@ -7,7 +7,7 @@
     </body>
         <h2>Calculator</h2>
 
-         <p>Result is: ${result} </p>
+         <p>Result is: ${alien} </p>
 
     </body>
 </html>

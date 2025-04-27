@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,7 +37,8 @@ public class HomeController {
     }
      */
 
-    // --------------------------- SpringBoot Way ----------------------
+    /*
+    --------------------------- SpringBoot Way ----------------------
     @RequestMapping("add")
     // num1 and num2 should be the same as the ones in the query parameter otherwise use @RequestParam(variable_name)
     public ModelAndView add(@RequestParam("num1") int num1, @RequestParam("num2") int num2, ModelAndView mv){
@@ -49,6 +51,14 @@ public class HomeController {
         // Set the page which needs to be called
         mv.setViewName("result");
         return mv;
+
+    }
+     */
+    @RequestMapping("addAlien")
+    // Assigns the param values to alien object
+    public String addAlien(Alien alien){
+
+        return "result";
 
     }
 }
