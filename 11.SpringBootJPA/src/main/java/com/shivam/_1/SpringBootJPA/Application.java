@@ -35,10 +35,20 @@ public class Application {
 		repo.save(s2);
 		repo.save(s3);
 
-		List<Student> students = repo.findAll();
+		List<Student> students = repo.findAll(); // Get all data
 		System.out.println(students);
 
-		System.out.println(repo.findById(103));
+		System.out.println(repo.findById(103)); // Find one by id
+
+		System.out.println(repo.findByName("First")); // Find by name
+
+		// Change some values
+		s2.setRoll(102);
+		s2.setName("Second");
+		s2.setMarks(49);
+		repo.save(s2); // This can be used to update as well
+
+		repo.delete(s2); // Delete the mentioned object
 	}
 
 }
