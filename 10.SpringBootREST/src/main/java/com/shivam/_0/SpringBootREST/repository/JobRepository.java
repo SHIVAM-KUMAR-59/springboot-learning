@@ -1,18 +1,23 @@
 package com.shivam._0.SpringBootREST.repository;
 
+//import com.shivam._0.SpringBootREST.model.JobPost;
+//import com.shivam._0.SpringBootREST.model.JobPost;
 import com.shivam._0.SpringBootREST.model.JobPost;
-import com.shivam._0.SpringBootREST.model.JobPost;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+//import java.util.ArrayList;
+//import java.util.Arrays;
+//import java.util.List;
+
+/*
 @Repository
 public class JobRepository {
 
 
-    // ArrayList to store JobPost objects
+    ArrayList to store JobPost objects
     List<JobPost> jobs = new ArrayList<>(Arrays.asList(
             new JobPost(1, "Java Developer", "Must have good experience in core Java and advanced Java", 2,
                     List.of("Core Java", "J2EE", "Spring Boot", "Hibernate")),
@@ -25,6 +30,7 @@ public class JobRepository {
             new JobPost(5, "Mobile App Developer", "Experience in mobile app development for iOS and Android", 3,
                     List.of("iOS Development", "Android Development", "Mobile App"))
     ));
+
 
     // method to return all JobPosts
     public List<JobPost> getAllJobs() {
@@ -72,4 +78,14 @@ public class JobRepository {
     }
 
 
+
+
+
+}
+*/
+
+@Repository
+public interface JobRepository extends JpaRepository<JobPost, Integer> {
+
+    public List<JobPost> findByPostProfileContainingOrPostDescContaining(String postProfile, String postDesc);
 }
