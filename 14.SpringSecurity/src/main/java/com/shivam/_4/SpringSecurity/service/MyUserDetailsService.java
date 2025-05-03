@@ -1,5 +1,6 @@
 package com.shivam._4.SpringSecurity.service;
 
+import com.shivam._4.SpringSecurity.model.UserPrinciple;
 import com.shivam._4.SpringSecurity.model.Users;
 import com.shivam._4.SpringSecurity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class MyUserDetailsService implements UserDetailsService {
             throw  new UsernameNotFoundException("user not found");
         }
 
-        return null;
+        return new UserPrinciple(user);
     }
 
 }
