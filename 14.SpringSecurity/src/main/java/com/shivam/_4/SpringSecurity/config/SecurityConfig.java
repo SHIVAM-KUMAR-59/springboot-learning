@@ -6,64 +6,58 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
-        return security
-                .csrf(customizer -> customizer.disable())
-                .authorizeHttpRequests(request -> request
-                        .requestMatchers("/register", "/login")
-                        .permitAll()
-                        .anyRequest().authenticated())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .build();
-    }
-
-    /*
-    ----------------------------------------- Static users ----------------------------------------------
-    @Bean
-    public UserDetailsService userDetailsService(){
-
-        UserDetails user = User.withDefaultPasswordEncoder().username("Shivam").password("1234").roles("USER").build();
-
-        UserDetails admin = User.withDefaultPasswordEncoder().username("Kiran").password("1234").roles("ADMIN").build();
-        return new InMemoryUserDetailsManager(user, admin);
-    }
-     */
+    @Autowired
+    private JWTFilter JWTFilter;
 
     @Autowired
     private UserDetailsService userDetailsService;
 
+    // Define the password encoder
     @Bean
-    public AuthenticationProvider authenticationProvider(){
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(12);
+    }
 
+    // Define authentication provider
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(new BCryptPasswordEncoder(12));
-
+        provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
 
+    // Configure HTTP security
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .csrf(csrf -> csrf.disable()) // Disable CSRF for APIs
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/register", "/login").permitAll() // Allow unauthenticated access to register/login
+                        .anyRequest().authenticated() // Secure all other endpoints
+                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Use JWT instead of sessions
+                .addFilterBefore(JWTFilter, UsernamePasswordAuthenticationFilter.class) // Add JWT filter before username/password auth
+                .build();
+    }
+
+    // Provide AuthenticationManager for manual auth (used in login controller)
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
-
 }
