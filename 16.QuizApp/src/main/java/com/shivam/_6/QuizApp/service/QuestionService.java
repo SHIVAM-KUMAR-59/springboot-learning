@@ -25,11 +25,22 @@ public class QuestionService {
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
-    public List<Question>getQuestionsByCategory(String category){
-        return repository.findByCategory(category);
+    public ResponseEntity<List<Question>> getQuestionsByCategory(String category){
+        try{
+            return new ResponseEntity<>(repository.findByCategory(category), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
-    public void insertQuestion(Question question){
-        repository.save(question);
+    public ResponseEntity<String> insertQuestion(Question question){
+        try{
+            repository.save(question);
+            return new ResponseEntity<>("success", HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>("Error inserting question", HttpStatus.BAD_REQUEST);
     }
 }
