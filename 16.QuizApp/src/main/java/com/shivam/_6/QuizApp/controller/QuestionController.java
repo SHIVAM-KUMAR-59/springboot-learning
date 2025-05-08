@@ -3,6 +3,7 @@ package com.shivam._6.QuizApp.controller;
 import com.shivam._6.QuizApp.model.Question;
 import com.shivam._6.QuizApp.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,11 @@ public class QuestionController {
     @PostMapping("/add")
     public ResponseEntity<String> insertQuestion(@RequestBody Question question){
         return service.insertQuestion(question);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteQuestion(@RequestBody Question question){
+        return service.deleteQuestion(question);
     }
 
 }

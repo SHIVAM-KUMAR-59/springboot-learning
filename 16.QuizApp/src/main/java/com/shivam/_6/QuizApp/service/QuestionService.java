@@ -43,4 +43,14 @@ public class QuestionService {
         }
         return new ResponseEntity<>("Error inserting question", HttpStatus.BAD_REQUEST);
     }
+
+    public ResponseEntity<String> deleteQuestion(Question question){
+        try{
+            repository.delete(question);
+            return new ResponseEntity<>("Success", HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>("Error deleting question", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
