@@ -1,7 +1,8 @@
 package com.shivam._71.Question_Service.service;
 
-import com.shivam._6.QuizApp.model.Question;
-import com.shivam._6.QuizApp.repository.QuestionRepository;
+
+import com.shivam._71.Question_Service.model.Question;
+import com.shivam._71.Question_Service.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

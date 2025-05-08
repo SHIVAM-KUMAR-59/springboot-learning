@@ -1,7 +1,7 @@
-package com.shivam._71.Question_Service.controller;
+package  com.shivam._71.Question_Service.controller;
 
-import com.shivam._6.QuizApp.model.Question;
-import com.shivam._6.QuizApp.service.QuestionService;
+
+import com.shivam._71.Question_Service.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import java.util.List;
 public class QuestionController {
 
     @Autowired
-    private QuestionService service;
+    private com.shivam._71.Question_Service.service.QuestionService service;
 
     @GetMapping("allQuestions")
     public ResponseEntity<List<Question>> getAllQuestions(){

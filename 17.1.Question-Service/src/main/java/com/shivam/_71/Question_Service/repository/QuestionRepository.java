@@ -1,6 +1,6 @@
 package com.shivam._71.Question_Service.repository;
 
-import com.shivam._6.QuizApp.model.Question;
+import com.shivam._71.Question_Service.model.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
