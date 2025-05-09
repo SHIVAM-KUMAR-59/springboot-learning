@@ -15,13 +15,13 @@ import java.util.List;
 public interface QuizInterface {
 
     // List the methods from teh question-service that you need
-    @GetMapping("/generate")
+    @GetMapping("question/generate")
     public ResponseEntity<List<Integer>> getQuestionsForQuiz(@RequestParam String category, @RequestParam int num);
 
-    @PostMapping("/getQuestions")
+    @PostMapping("question/getQuestions")
     public ResponseEntity<List<QuestionWrapper>> getQuestionsForId(@RequestBody List<Integer> questionIds);
 
-    @PostMapping("/getScore")
+    @PostMapping("question/getScore")
     public ResponseEntity<Integer> getScore(@RequestBody List<Response> responses);
 
 }

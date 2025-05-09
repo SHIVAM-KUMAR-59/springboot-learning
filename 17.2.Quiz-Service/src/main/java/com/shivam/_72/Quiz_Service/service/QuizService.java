@@ -39,14 +39,11 @@ public class QuizService {
 
     public ResponseEntity<List<QuestionWrapper>> getQuiz(int  quizId){
         try{
-//            Optional<Quiz> quiz = repository.findById(quizId);
-//            List<Question> questionsFromDB = quiz.get().getQuestions();
-            List<QuestionWrapper> questionWrappers = new ArrayList<>();
-//            for(Question question : questionsFromDB){
-//                QuestionWrapper q = new QuestionWrapper(question.getId(), question.getQuestionTitle(), question.getOption1(), question.getOption2(), question.getOption3(), question.getOption4());
-//                questionWrappers.add(q);
-//            }
-            return new ResponseEntity<>(questionWrappers, HttpStatus.OK);
+            Quiz quiz = repository.findById(quizId).get();
+            List<Integer> questionIds = quiz.getQuestions();
+            ResponseEntity<List<QuestionWrapper>> questions = quizInterface.getQuestionsForId(questionIds);
+
+            return questions;
         } catch (Exception e) {
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
         }
@@ -54,17 +51,9 @@ public class QuizService {
 
     public ResponseEntity<Integer> submitQuiz(int quizId, List<Response> responses){
 
-        Optional<Quiz> quiz = repository.findById(quizId);
-//        List<Question> questions = quiz.get().getQuestions();
-        int score = 0;
-//        int i = 0;
-//        for(Response response : responses){
-//            if(response.getResponse().equals(questions.get(i).getRightAnswer())){
-//                score++;
-//            }
-//            i++;
-//        }
+        ResponseEntity<Integer> score = quizInterface.getScore(responses);
 
-        return new ResponseEntity<>(score, HttpStatus.OK);
+
+        return score;
     }
 }
